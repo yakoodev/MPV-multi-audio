@@ -21,6 +21,8 @@ This Lua script for MPV allows **simultaneous playback of multiple audio tracks*
 - Mute toggle per track  
 - Supports both numpad and non-numpad keyboards  
 - Automatic activation of all audio tracks on file load  
+- On-the-fly ON/OFF toggle via `NumPad 0` (multi-audio is OFF by default)
+- Off by default avoids simultaneous playback of all audio tracks returned by yt-dlp for YouTube URLs
 
 **RU:**  
 - Индивидуальная регулировка громкости с сохранением настроек  
@@ -28,6 +30,8 @@ This Lua script for MPV allows **simultaneous playback of multiple audio tracks*
 - Возможность отключения звука для выбранной дорожки  
 - Поддержка клавиатур с NumPad и без него  
 - Автоматическая активация всех аудиодорожек при загрузке файла  
+- Включение/выключение на лету по клавише `NumPad 0` (по умолчанию мульти-аудио выключено)
+- Выключенное по умолчанию состояние предотвращает одновременное воспроизведение всех аудиодорожек, которые yt-dlp возвращает для YouTube
 
 ---
 
@@ -50,17 +54,23 @@ This Lua script for MPV allows **simultaneous playback of multiple audio tracks*
 ## 📥 Installation | Установка  
 
 **EN (Portable version):**  
-1. Download the script: [multi-audio.lua](multi-audio.lua)  
-2. Place it into:  <MPV.exe directory>\portable_config\scripts\\>
+1. Download both files: [main.lua](main.lua) and [multi-audio.lua](multi-audio.lua)
+2. Create the folder `<MPV.exe directory>\portable_config\scripts\multi-audio\` and place both files into it:
+   - `main.lua` — controller
+   - `multi-audio.lua` — original mixer (unmodified)
 
 
 **RU (Portable-версия):**  
-1. Скачайте скрипт: [multi-audio.lua](multi-audio.lua)  
-2. Поместите его в директорию:  <MPV.exe directory>\portable_config\scripts\\>
+1. Скачайте оба файла: [main.lua](main.lua) и [multi-audio.lua](multi-audio.lua)
+2. Создайте папку `<MPV.exe directory>\portable_config\scripts\multi-audio\` и поместите в неё оба файла:
+   - `main.lua` — контроллер
+   - `multi-audio.lua` — оригинальный микшер (без изменений)
 
 **Scripts directory | Директория для скрипта**
 
-%APPDATA%\mpv\scripts\multi-audio.lua
+%APPDATA%\mpv\scripts\multi-audio\
+├── main.lua
+└── multi-audio.lua
 
 
 
@@ -77,6 +87,7 @@ This Lua script for MPV allows **simultaneous playback of multiple audio tracks*
 | `NumPad 5` | `Ctrl + M`     | Toggle mute             | Вкл/выкл звук                |  
 | `NumPad -` | `Ctrl + -`     | Large decrease volume   | Уменьшить громкость (много)  |  
 | `NumPad +` | `Ctrl + =`     | Large increase volume   | Увеличить громкость (много)  |  
+| `NumPad 0` | `0`            | Toggle multi-audio ON/OFF (default: OFF) | Вкл/выкл мульти-аудио (по умолчанию: выкл.) |
 
 ---
 
@@ -87,8 +98,10 @@ MPV_portable/
 ├── mpv.exe
 ├── mpv.conf
 └── portable_config/
-└── scripts/
-└── multi-audio.lua
+    └── scripts/
+        └── multi-audio/
+            ├── main.lua
+            └── multi-audio.lua
 ```
 
 ---
@@ -99,9 +112,11 @@ MPV_portable/
 - Saves per-track volumes globally and restores them automatically.  
 - Works out-of-the-box with no dependencies.  
 - Provided under MIT license.  
+- Multi-audio is OFF by default; press `NumPad 0` to enable it and `NumPad 0` again to disable it. This is the recommended way to avoid the yt-dlp/YouTube issue where all returned audio tracks play simultaneously.
 
 **RU:**  
 - Громкость дорожек сохраняется глобально и восстанавливается автоматически.  
 - Работает "из коробки", без зависимостей.  
 - Распространяется под лицензией MIT.  
+- По умолчанию мульти-аудио выключено; `NumPad 0` включает его, повторное `NumPad 0` — выключает. Это рекомендуемый способ избежать проблемы yt-dlp/YouTube, когда одновременно играют все возвращённые аудиодорожки.
 
